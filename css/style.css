@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #2c2d35;
+  background: #f5f5f5;
+}
+
+button {
+  border: none;
+}
+
+.main-wrapper {
+  margin: 0 auto;
+  padding-top: 80px;
+  width: 594px;
+}
+
+.main-title {
+  font-family: "Inter", sans-serif;
+  font-size: 58px;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 33px;
+  text-align: center;
+}
+
+.main-list-wrapper {
+  border-radius: 16px;
+  background: #fff;
+  width: 594px;
+  box-shadow: 0px 8px 35px 0px rgba(0, 0, 0, 0.16);
+}
+
+.main-list-header {
+  display: flex;
+  border-bottom: 1px solid #dee2e6;
+  padding-left: 24px;
+  padding-top: 24px;
+}
+
+.main-task-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.main-add {
+  font-family: "Inter", sans-serif;
+  border-radius: 4px;
+  background: #272829;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #fff;
+  display: flex;
+  width: 166px;
+  height: 39px;
+  padding: 10px 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-input {
+  width: 356px;
+  height: 38px;
+  margin-right: 24px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  color: #54595e;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+  margin-bottom: 24px;
+}
+
+.main-option-wrapper {
+  padding-left: 24px;
+  padding-top: 32px;
+  padding-right: 24px;
+}
+
+.main-checkbox {
+  width: 16px;
+  height: 16px;
+  margin-right: 16px;
+  background-color: #7749f8;
+}
+
+.main-task {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #54595e;
+  margin-right: 43px;
+}
+
+.main-footer {
+  width: 594px;
+}
+
+.main-footer-wrapper {
+  border-radius: 0px 0px 16px 16px;
+  background: #f5f5f5;
+}
+
+.main-footer-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 24px 18px 24px;
+}
+
+.main-delete-completed {
+  padding: 10px 16px;
+  align-items: center;
+  display: flex;
+  border-radius: 4px;
+  background: #6c757d;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  color: white;
+}
+
+.main-delete-all {
+  display: flex;
+  padding: 10px 16px;
+  align-items: center;
+  background: #dc3545;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  color: #fff;
+  border-radius: 4px;
+}
