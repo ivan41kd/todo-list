@@ -18,6 +18,11 @@ body {
 
 button {
   border: none;
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
 }
 
 .main-wrapper {
@@ -47,13 +52,6 @@ button {
   border-bottom: 1px solid #dee2e6;
   padding-left: 24px;
   padding-top: 24px;
-}
-
-.main-task-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
 }
 
 .main-add {
@@ -109,6 +107,17 @@ button {
   line-height: 21px;
   color: #54595e;
   margin-right: 43px;
+}
+
+.main-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.main-delete {
+  cursor: pointer;
 }
 
 .main-footer {
