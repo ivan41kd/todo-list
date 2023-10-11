@@ -85,11 +85,12 @@ li {
   font-weight: 400;
   line-height: 21px;
   margin-bottom: 24px;
+  padding: 9px 0px 9px 13px;
+  outline: none;
 }
 
 .main-option-wrapper {
   padding-left: 24px;
-  padding-top: 32px;
   padding-right: 24px;
 }
 
@@ -97,7 +98,15 @@ li {
   width: 16px;
   height: 16px;
   margin-right: 16px;
-  background-color: #7749f8;
+  text-decoration: line-through;
+}
+.main-checkbox:checked {
+  accent-color: blueviolet;
+}
+
+.main-checkbox:checked + .main-task {
+  text-decoration-line: line-through;
+  opacity: 0.5;
 }
 
 .main-task {
@@ -106,7 +115,6 @@ li {
   font-weight: 400;
   line-height: 21px;
   color: #54595e;
-  margin-right: 43px;
 }
 
 .main-option {
@@ -116,8 +124,40 @@ li {
   margin-bottom: 25px;
 }
 
+.main-option-item {
+  display: flex;
+  align-items: center;
+}
+
+.main-buttons-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .main-delete {
   cursor: pointer;
+}
+
+.main-save {
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 21px;
+  margin-right: 16px;
+}
+
+.main-change {
+  margin-right: 16px;
+}
+
+.main-input-change {
+  width: 450px;
+  padding: 9px 0px 9px 17px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  background: #fff;
+  outline: none;
+  font-size: 16px;
+  color: #54595e;
 }
 
 .main-footer {

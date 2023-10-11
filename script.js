@@ -3,7 +3,6 @@ const input = document.querySelector(".main-input");
 const optionWrapper = document.querySelector(".main-option-wrapper");
 const taskWrapper = document.querySelector(".main-task-wrapper");
 const add = document.querySelector(".main-add");
-const option = document.querySelector(".main-option");
 const footer = document.querySelector(".main-footer");
 
 // Массив задач
@@ -38,26 +37,57 @@ add.addEventListener("click", () => {
 
 function createTodo({ id, isDone, text }) {
   const li = document.createElement("li");
-  li.className = "main-option";
-  li.innerHTML = `                <input type="checkbox" ${
+  const div = document.createElement("div");
+  const buttons = document.createElement("div");
+
+  div.className = "main-option-item";
+  div.innerHTML = `                <input type="checkbox" ${
     isDone ? "checked" : ""
   }  id="${id}" class="main-checkbox" />
-  <p class="main-task">${text}</p>
-  <p class="main-delete">❌</p>`;
-  taskWrapper.append(li);
+  <p class="main-task">${text}</p>`;
+
+  buttons.className = "main-buttons-wrapper";
+  buttons.innerHTML = `  <p class='main-change'>✏️</p>
+  <p class="main-delete">🗑</p>`;
+
+  li.className = "main-option";
+  li.prepend(div);
+  taskWrapper.prepend(li);
+  li.append(buttons);
+
+  const title = li.querySelector(".main-task");
+  const change = li.querySelector(".main-change");
+  const save = document.createElement("p");
+  save.className = ".main-save";
+  save.textContent = "✅";
+  change.addEventListener("click", () => {
+    const save = document.createElement("p");
+    const changeInput = document.createElement("input");
+    changeInput.className = "main-input-change";
+    changeInput.value = title.textContent;
+
+    title.replaceWith(changeInput);
+    change.replaceWith(save);
+
+    save.className = "main-save";
+    save.innerHTML = "✅";
+
+    save.addEventListener("click", () => {
+      changeInput.replaceWith(title);
+      save.replaceWith(change);
+      title.textContent = changeInput.value;
+      const toggleditem = todos.find((todo) => todo.text === text);
+      toggleditem.text = title.textContent;
+      renderTodos();
+      localStorage.setItem("todos", JSON.stringify(todos));
+    });
+  });
   const crossDel = li.querySelector(".main-delete");
   crossDel.addEventListener("click", () => deleteTodo(id));
-  const checkBox = li.querySelector(".main-checkbox");
+  const checkBox = div.querySelector(".main-checkbox");
   checkBox.addEventListener("change", () => {
-    const todo = todos.find((todo) => todo.id === id);
-    if (todo) {
-      const checkTask = li.querySelector(".main-task");
-      checkTask.style.textDecoration = checkBox.checked
-        ? "line-through"
-        : "none";
-      todo.isDone = checkBox.checked;
-      localStorage.setItem("todos", JSON.stringify(todos));
-    }
+    toggleIsDone(id);
+    localStorage.setItem("todos", JSON.stringify(todos));
   });
 }
 
@@ -68,9 +98,9 @@ function renderTodos() {
   const footerWrapper = document.createElement("div");
   footerWrapper.className = "main-footer-wrapper";
   footerWrapper.innerHTML = `<button type="button" class="main-delete-completed">
-                Удалить завершенные
-              </button>
-              <button type="button" class="main-delete-all">Удалить все</button>`;
+  Удалить завершенные
+  </button>
+  <button type="button" class="main-delete-all">Удалить все</button>`;
   footer.append(footerWrapper);
   const deleteCompletedButt = footerWrapper.querySelector(
     `.main-delete-completed`
@@ -79,6 +109,10 @@ function renderTodos() {
   deleteAllButt.addEventListener("click", () => deleteAll());
 
   deleteCompletedButt.addEventListener("click", () => deleteCompleted());
+  if (todos.length === 0) {
+    footerDisplay();
+  }
+  changePadding();
 }
 
 // Удвление задачи (одной конкретной)
@@ -93,6 +127,8 @@ function deleteAll() {
   todos.length = 0;
   localStorage.setItem("todos", JSON.stringify(todos));
   taskWrapper.innerHTML = "";
+  footerDisplay();
+  changePadding();
 }
 
 // Удаление выполненных задач (isDone: true)
@@ -100,6 +136,29 @@ function deleteCompleted() {
   todos = todos.filter((todo) => !todo.isDone);
   localStorage.setItem("todos", JSON.stringify(todos));
   renderTodos();
+  changePadding();
+}
+
+// Отображение footer
+function footerDisplay() {
+  const footer = document.querySelector(".main-footer");
+  const footerWrapper = document.querySelector(".main-footer-wrapper");
+
+  footer.innerHTML = "";
+  footerWrapper.innerHTML = "";
+}
+
+function toggleIsDone(id) {
+  const toggleditem = todos.find((todo) => todo.id === id);
+  toggleditem.isDone = !toggleditem.isDone;
+}
+
+function changePadding() {
+  if (todos.length > 0) {
+    optionWrapper.style.paddingTop = "32px";
+  } else {
+    optionWrapper.style.paddingTop = "";
+  }
 }
 
 // Кнопка добавления
