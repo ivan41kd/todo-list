@@ -99,6 +99,7 @@ li {
   height: 16px;
   margin-right: 16px;
   text-decoration: line-through;
+  cursor: pointer;
 }
 .main-checkbox:checked {
   accent-color: blueviolet;
@@ -147,6 +148,7 @@ li {
 
 .main-change {
   margin-right: 16px;
+  cursor: pointer;
 }
 
 .main-input-change {

@@ -1,11 +1,10 @@
-// Переменные с нужными элементами
+
 const input = document.querySelector(".main-input");
 const optionWrapper = document.querySelector(".main-option-wrapper");
 const taskWrapper = document.querySelector(".main-task-wrapper");
 const add = document.querySelector(".main-add");
 const footer = document.querySelector(".main-footer");
 
-// Массив задач
 let todos = [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,9 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTodos();
 });
 
-//Добавление сущности(задачи) в массив задач
 function addTodo(text) {
-  todos.push({
+  todos.unshift({
     text: text,
     id: `${Date.now()}`,
     isDone: false,
@@ -52,7 +50,7 @@ function createTodo({ id, isDone, text }) {
 
   li.className = "main-option";
   li.prepend(div);
-  taskWrapper.prepend(li);
+  taskWrapper.append(li);
   li.append(buttons);
 
   const title = li.querySelector(".main-task");
@@ -75,9 +73,12 @@ function createTodo({ id, isDone, text }) {
     save.addEventListener("click", () => {
       changeInput.replaceWith(title);
       save.replaceWith(change);
+      if (changeInput.value === "") {
+        changeInput.value = title.textContent;
+      }
       title.textContent = changeInput.value;
-      const toggleditem = todos.find((todo) => todo.text === text);
-      toggleditem.text = title.textContent;
+      const changedText = todos.find((todo) => todo.text === text);
+      changedText.text = title.textContent;
       renderTodos();
       localStorage.setItem("todos", JSON.stringify(todos));
     });
@@ -115,14 +116,12 @@ function renderTodos() {
   changePadding();
 }
 
-// Удвление задачи (одной конкретной)
 function deleteTodo(id) {
   todos = todos.filter((todo) => todo.id != id);
   localStorage.setItem("todos", JSON.stringify(todos));
   renderTodos();
 }
 
-// Удаление всех задач
 function deleteAll() {
   todos.length = 0;
   localStorage.setItem("todos", JSON.stringify(todos));
@@ -131,7 +130,6 @@ function deleteAll() {
   changePadding();
 }
 
-// Удаление выполненных задач (isDone: true)
 function deleteCompleted() {
   todos = todos.filter((todo) => !todo.isDone);
   localStorage.setItem("todos", JSON.stringify(todos));
@@ -139,7 +137,6 @@ function deleteCompleted() {
   changePadding();
 }
 
-// Отображение footer
 function footerDisplay() {
   const footer = document.querySelector(".main-footer");
   const footerWrapper = document.querySelector(".main-footer-wrapper");
@@ -161,46 +158,3 @@ function changePadding() {
   }
 }
 
-// Кнопка добавления
-
-// add.addEventListener("click", () => {
-//   const inputValue = input.value;
-//   inputValue !== "" ? addTask(inputValue) : alert("Пустая строка!");
-//   input.value = "";
-// });
-
-// // Кнопка удаления всех элементов
-// deleteAll.addEventListener("click", () => {
-//   optionWrapper.innerHTML = "";
-// });
-
-// // Отрисовка элемента с функциями удаления
-// function renderTodo(obj) {
-//   const todo = document.createElement("div");
-//   todo.className = "main-task-wrapper";
-//   todo.innerHTML = `<input type="checkbox" name="" id="" class="main-checkbox" />
-//               <p class="main-task">
-//                 ${obj.text}
-//               </p>
-//               <p class="main-delete">❌</p>`;
-//   optionWrapper.append(todo);
-//   const deleteCross = todo.querySelector(".main-delete");
-//   deleteCross.addEventListener("click", () => {
-//     optionWrapper.removeChild(todo);
-//   });
-//   const checkBox = todo.querySelector(".main-checkbox");
-//   checkBox.addEventListener("click", () => {
-//     const checkTask = todo.querySelector(".main-task");
-//     checkTask.style.textDecoration = checkBox.checked ? "line-through" : "none";
-//   });
-// }
-
-// deleteCompleted.addEventListener("click", () => {
-//   const tasks = document.querySelectorAll(".main-task-wrapper");
-//   tasks.forEach((task) => {
-//     const checkTask = task.querySelector(".main-task");
-//     if (checkTask.style.textDecoration === "line-through") {
-//       optionWrapper.removeChild(task);
-//     }
-//   });
-// });
